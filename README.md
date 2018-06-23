@@ -37,6 +37,8 @@ for i in 1:100
 end
 ```
 
+![](docs/images/scalar_example.png)
+
 ### Histogram
 
 ```julia
@@ -47,6 +49,8 @@ for i in 1:100
 end
 ```
 
+![](docs/images/histogram_example.png)
+
 ### Text
 
 ```julia
@@ -56,6 +60,8 @@ for i in 1:100
     end
 end
 ```
+
+![](docs/images/text_example.png)
 
 ### Image
 
@@ -77,6 +83,8 @@ end
 save(train_logger)
 save(test_logger)
 ```
+
+![](docs/images/image_example.png)
 
 ## TODO
 
