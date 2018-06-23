@@ -96,3 +96,4 @@ Finally, run `visualDL --logdir ./tmp` in current dir. Then launch the visualdl 
 - [ ] Make Release
 - [ ] Add `LogReader` and tests
 - [ ] Move out the `start_sampling` and `finish_sampling` from `@log_image` and `@log_audio`
+- [ ] Precompile
