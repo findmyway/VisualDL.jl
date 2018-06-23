@@ -1,0 +1,11 @@
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+deps/deps.jl
+
+tmp/*
