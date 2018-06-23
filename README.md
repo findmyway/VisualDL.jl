@@ -86,6 +86,10 @@ save(test_logger)
 
 ![](docs/images/image_example.png)
 
+Finally, run `visualDL --logdir ./tmp` in current dir. Then launch the visualdl service and watch the above pictures in browser. The default url is `http://localhost:8040`:
+
+
+
 ## TODO
 
 - [ ] More documentation
