@@ -1,5 +1,4 @@
 using Base.CoreLogging
-using PyCall
 
 import Base.CoreLogging: min_enabled_level, shouldlog, handle_message, catch_exceptions
 
@@ -16,7 +15,6 @@ const TextLevel = LogLevel(883)
 const AudioLevel = LogLevel(884)
 const ImageLevel = LogLevel(885)
 
-@pyimport visualdl as vdl
 
 """
 `VisualDLLogger` is  a subtype of `AbstractLogger`. And all the necessary interfaces 
