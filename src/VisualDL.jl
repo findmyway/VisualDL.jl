@@ -1,7 +1,12 @@
+__precompile__()
 module VisualDL
 
 using PyCall
-@pyimport visualdl as vdl
+const LogWriter = PyNULL()
+
+function __init__()
+    copy!(LogWriter, pywrap(pyimport("visualdl")).LogWriter)
+end
 
 include("logger.jl")
 

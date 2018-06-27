@@ -37,7 +37,7 @@ for i in 1:100
 end
 ```
 
-![](docs/images/scalar_example.png)
+![](docs/src/images/scalar_example.png)
 
 ### Histogram
 
@@ -49,7 +49,7 @@ for i in 1:100
 end
 ```
 
-![](docs/images/histogram_example.png)
+![](docs/src/images/histogram_example.png)
 
 ### Text
 
@@ -61,7 +61,7 @@ for i in 1:100
 end
 ```
 
-![](docs/images/text_example.png)
+![](docs/src/images/text_example.png)
 
 ### Image
 
@@ -84,7 +84,7 @@ save(train_logger)
 save(test_logger)
 ```
 
-![](docs/images/image_example.png)
+![](docs/src/images/image_example.png)
 
 Finally, run `visualDL --logdir ./tmp` in current dir. Then launch the visualdl service and watch the above pictures in browser. The default url is `http://localhost:8040`:
 
@@ -92,8 +92,9 @@ Finally, run `visualDL --logdir ./tmp` in current dir. Then launch the visualdl 
 
 ## TODO
 
-- [ ] More documentation
-- [ ] Make Release
-- [ ] Add `LogReader` and tests
+- [x] More documentation
+- [x] ~~Add `LogReader`~~ and tests
+- [x] Precompile
 - [ ] Move out the `start_sampling` and `finish_sampling` from `@log_image` and `@log_audio`
-- [ ] Precompile
+- [ ] Make Release
+- [ ] Travis

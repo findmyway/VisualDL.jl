@@ -52,7 +52,7 @@ Typically adding a record requires 6 operations. System will save the data into
 the file system once operations count reaches `sync_cycle`.
 """
 function VisualDLLogger(log_path::AbstractString, sync_cycle::Int, mode::AbstractString="train")
-    pylogger = vdl.LogWriter(log_path, sync_cycle)
+    pylogger = LogWriter(log_path, sync_cycle)
     pylogger[:mode](mode)
     VisualDLLogger(pylogger, Dict{Symbol, PyObject}())
 end
