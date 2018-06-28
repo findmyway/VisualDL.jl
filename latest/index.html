@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Home · VisualDL.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>VisualDL.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li class="current"><a class="toctext" href="index.html">Home</a><ul class="internal"><li><a class="toctext" href="#Install-1">Install</a></li><li><a class="toctext" href="#Example-1">Example</a></li><li><a class="toctext" href="#Reference-1">Reference</a></li></ul></li></ul></nav><article id="docs"><header><nav><ul><li><a href="index.html">Home</a></li></ul><a class="edit-page" href="https://github.com/findmyway/VisualDL.jl/blob/master/docs/src/index.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Home</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="VisualDL.jl-1" href="#VisualDL.jl-1">VisualDL.jl</a></h1><p>This package provides a julia wrapper for <a href="https://github.com/PaddlePaddle/VisualDL">VisualDL</a>, which is a deep learning visualization tool that can help design deep learning jobs.</p><p>Currently, the wrapper is written on top of the Python SDK of VisualDL by <a href="https://github.com/JuliaPy/PyCall.jl">PyCall</a>. I have tried to write the wrapper on top of the C++ SDK by leveraging <a href="https://github.com/JuliaInterop/CxxWrap.jl">CxxWrap.jl</a>. But unluckily a strange error encountered. Hopefully I&#39;ll figured it out later and swap the backend into C++.</p><h2><a class="nav-anchor" id="Install-1" href="#Install-1">Install</a></h2><ul><li><p>First, install the Python client of VisualDL. Checkout <a href="https://github.com/PaddlePaddle/VisualDL#install-with-virtualenv">here</a> for a detailed guide. </p></li><li><p>Then add this package as a dependent.</p><p><code>pkg&gt; add https://github.com/findmyway/VisualDL.jl</code></p></li></ul><h2><a class="nav-anchor" id="Example-1" href="#Example-1">Example</a></h2><div><pre><code class="language-julia">using VisualDL
+
+# initialize
+train_logger = VisualDLLogger(&quot;tmp&quot;, 1, &quot;train&quot;)
+test_logger = as_mode(train_logger, &quot;test&quot;)
+
+# log scalars
+for i in 1:100
+    with_logger(train_logger) do
+        @log_scalar s0=(i,rand()) s1=(i, rand())
+    end
+
+    with_logger(test_logger) do
+        @log_scalar s0=(i,rand()) s1=(i, rand())
+    end
+end
+
+# log histograms
+for i in 1:100
+    with_logger(train_logger) do
+       @log_histogram h0=(i, randn(100))
+    end
+end
+
+# log texts
+for i in 1:100
+    with_logger(train_logger) do
+       @log_text t0=(i, &quot;This is test &quot; * string(i))
+    end
+end
+
+# log images
+for i in 1:100
+    with_logger(train_logger) do
+       @log_image i0=([3,3,3], rand(27) * 255)
+    end
+end
+
+for i in 1:100
+    with_logger(test_logger) do
+        # Array{Number, 3} is also supported
+        @log_image image0=rand(10, 10, 3) * 255
+    end
+end
+
+save(train_logger)
+save(test_logger)</code></pre></div><h2><a class="nav-anchor" id="Reference-1" href="#Reference-1">Reference</a></h2><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.VisualDLLogger" href="#VisualDL.VisualDLLogger"><code>VisualDL.VisualDLLogger</code></a> — <span class="docstring-category">Type</span>.</div><div><div><p><code>VisualDLLogger</code> is  a subtype of <code>AbstractLogger</code>. And all the necessary interfaces  are implemented. This means that you can use <code>Base.CoreLogging.disable_logging</code> to control the log level and use the similar grammar like <code>@info</code>.</p><p>The provided log levels are:</p><pre><code class="language-none">const ScalarLevel = LogLevel(880)
+const HistogramLevel = LogLevel(881)
+const EmbeddingLevel = LogLevel(882)
+const TextLevel = LogLevel(883)
+const AudioLevel = LogLevel(884)
+const ImageLevel = LogLevel(885)</code></pre><p>which are between the <code>Info</code> level(<code>LogLevel(0)</code><code>) and</code>Warn<code>level(</code>LogLevel(1000)`).</p><p>There are two members in the <code>VisualDLLogger</code>, a <code>pylogger</code> which is a wrapper of the python logger instance, and a <code>components</code> which is a <code>Dict</code> containing all the components related to the <code>logger</code>.</p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L19-L40">source</a></section><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.@log_scalar" href="#VisualDL.@log_scalar"><code>VisualDL.@log_scalar</code></a> — <span class="docstring-category">Macro</span>.</div><div><div><pre><code class="language-none">@log_scalar [tag_name=(args...) | ...]
+@log_histogram [tag_name=(args...) | ...]
+@log_embedding [tag_name=(args...) | ...]
+@log_text [tag_name=(args...) | ...]
+@log_audio [tag_name=(args...) | ...]
+@log_image [tag_name=(args...) | ...]</code></pre><p>Add a record to a component which has the <code>tag_name</code>. If the component is not initialized yet, a new component will be created automatically with default arguments. For the detail of <code>args</code> of each component, please read the <a href="http://visualdl.paddlepaddle.org/docs/develop/visualdl/en/api/write_logs.html">doc</a></p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L209-L220">source</a></section><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.add_component" href="#VisualDL.add_component"><code>VisualDL.add_component</code></a> — <span class="docstring-category">Function</span>.</div><div><div><pre><code class="language-none">add_component(logger, level, tag; kwargs...)</code></pre><p>Althrough this package will automatically initial a component for you when you add records to a component for the first time, it is strongly suggested to use this function to initial a component manually.</p><p>For the detail of <code>kwargs</code>, please read the <a href="http://visualdl.paddlepaddle.org/docs/develop/visualdl/en/api/write_logs.html">python api</a></p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L106-L114">source</a></section><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.as_mode" href="#VisualDL.as_mode"><code>VisualDL.as_mode</code></a> — <span class="docstring-category">Function</span>.</div><div><div><pre><code class="language-none">as_mode(logger, mode)</code></pre><p>Clone a logger and reset the mode.</p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L60-L64">source</a></section><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.start_sampling" href="#VisualDL.start_sampling"><code>VisualDL.start_sampling</code></a> — <span class="docstring-category">Function</span>.</div><div><div><pre><code class="language-none">start_sampling(logger, tag)</code></pre><p>This function is only valid for <code>@log_image</code> and <code>@log_audio</code>.</p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L78-L82">source</a></section><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.finish_sampling" href="#VisualDL.finish_sampling"><code>VisualDL.finish_sampling</code></a> — <span class="docstring-category">Function</span>.</div><div><div><pre><code class="language-none">finish_sampling(logger, tag)</code></pre><p>This function is only valid for <code>@log_image</code> and <code>@log_audio</code>.</p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L87-L91">source</a></section><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.set_caption" href="#VisualDL.set_caption"><code>VisualDL.set_caption</code></a> — <span class="docstring-category">Function</span>.</div><div><div><pre><code class="language-none">set_caption(logger, tag, caption)</code></pre><p>Set the caption of a figure.</p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L69-L73">source</a></section><section class="docstring"><div class="docstring-header"><a class="docstring-binding" id="VisualDL.save" href="#VisualDL.save"><code>VisualDL.save</code></a> — <span class="docstring-category">Function</span>.</div><div><div><pre><code class="language-none">save(logger)</code></pre><p>Although the <code>logger</code> will automatically save data when the <code>sync_cycle</code> is reached. It is better to force save in the end.</p></div></div><a class="source-link" target="_blank" href="https://github.com/findmyway/VisualDL.jl/blob/45b3d53c1fef8c3bfe8540af0d9ed34fdfd1842c/src/logger.jl#L96-L101">source</a></section><footer><hr/></footer></article></body></html>
