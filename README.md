@@ -1,5 +1,7 @@
 # VisualDL.jl
 
+[![Build Status](https://travis-ci.org/findmyway/VisualDL.jl.svg?branch=master)](https://travis-ci.org/findmyway/VisualDL.jl)
+
 This package provides a julia wrapper for [VisualDL](https://github.com/PaddlePaddle/VisualDL), which is a deep learning visualization tool that can help design deep learning jobs.
 
 Currently, the wrapper is written on top of the Python SDK of VisualDL by [PyCall](https://github.com/JuliaPy/PyCall.jl). I have tried to write the wrapper on top of the C++ SDK by leveraging [CxxWrap.jl](https://github.com/JuliaInterop/CxxWrap.jl). But unluckily a strange error encountered. Hopefully I'll figured it out later and swap the backend into C++.

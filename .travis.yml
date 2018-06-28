@@ -14,5 +14,7 @@ before_install:
 script:
     - julia -e 'using Pkg; Pkg.build("VisualDL")'
     - julia -e 'using Pkg; Pkg.test("VisualDL")'
+after_success:
+    - julia -e 'include(joinpath("docs", "make.jl"))'
 notifications:
     email: true
