@@ -1,6 +1,7 @@
 # VisualDL.jl
 
 [![Build Status](https://travis-ci.org/findmyway/VisualDL.jl.svg?branch=master)](https://travis-ci.org/findmyway/VisualDL.jl)
+[![](https://img.shields.io/badge/docs-latest-blue.svg)](https://findmyway.github.io/VisualDL.jl/latest)
 
 This package provides a julia wrapper for [VisualDL](https://github.com/PaddlePaddle/VisualDL), which is a deep learning visualization tool that can help design deep learning jobs.
 
@@ -97,6 +98,6 @@ Finally, run `visualDL --logdir ./tmp` in current dir. Then launch the visualdl 
 - [x] More documentation
 - [x] ~~Add `LogReader`~~ and tests
 - [x] Precompile
-- [ ] Move out the `start_sampling` and `finish_sampling` from `@log_image` and `@log_audio`
+- [x] Travis
 - [ ] Make Release
-- [ ] Travis
+- [ ] Move out the `start_sampling` and `finish_sampling` from `@log_image` and `@log_audio`
