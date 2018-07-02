@@ -8,6 +8,6 @@ makedocs(modules=[VisualDL],
 
 deploydocs(repo="github.com/findmyway/VisualDL.jl.git",
     target="build",
-    julia="nightly",
+    julia="0.7",
     deps=nothing,
     make=nothing)
