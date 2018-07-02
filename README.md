@@ -11,9 +11,9 @@ Currently, the wrapper is written on top of the Python SDK of VisualDL by [PyCal
 
 - First, install the Python client of VisualDL. Checkout [here](https://github.com/PaddlePaddle/VisualDL#install-with-virtualenv) for a detailed guide. 
 
-- Then add this package as a dependent.
+- Then add this package as a dependent(only tested on Julia v0.7).
 
-    `pkg> add https://github.com/findmyway/VisualDL.jl`
+    `(v0.7) pkg> add VisualDL`
 
 ## Usage
 
@@ -99,5 +99,5 @@ Finally, run `visualDL --logdir ./tmp` in current dir. Then launch the visualdl 
 - [x] ~~Add `LogReader`~~ and tests
 - [x] Precompile
 - [x] Travis
-- [ ] Make Release
+- [x] Make Release
 - [ ] Move out the `start_sampling` and `finish_sampling` from `@log_image` and `@log_audio`

@@ -27,13 +27,6 @@ Currently, the wrapper is written on top of the Python SDK of VisualDL by [PyCal
 ## Reference
 
 
-```@docs
-VisualDLLogger
-@log_scalar
-add_component
-as_mode
-start_sampling
-finish_sampling
-set_caption
-save
+```@autodocs
+Modules = [VisualDL]
 ```
