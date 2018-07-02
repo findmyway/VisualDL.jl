@@ -13,8 +13,8 @@ before_install:
     - sudo apt-get update
     - sudo pip install --upgrade visualdl
 script:
-    - julia -e 'Pkg.build("VisualDL"); Pkg.test("VisualDL"; coverage=true)'
+    - julia -e 'using Pkg; Pkg.add(pwd()); Pkg.build("VisualDL"); Pkg.test("VisualDL"; coverage=true)'
 after_success:
-    - julia -e 'Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))'
+    - julia -e 'using Pkg; Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))'
 notifications:
     email: false
