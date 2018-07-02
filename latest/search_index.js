@@ -41,6 +41,78 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "index.html#VisualDL.VisualDLLogger",
+    "page": "Home",
+    "title": "VisualDL.VisualDLLogger",
+    "category": "type",
+    "text": "VisualDLLogger(log_path, sync_cycle, mode=\"train\")\n\nCreate a logger instance. log_path is used to specify where to store the log data. sync_cycle specify how often should the system store data into the file system. Typically adding a record requires 6 operations. System will save the data into the file system once operations count reaches sync_cycle.\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.add_component-Tuple{VisualDLLogger,Base.CoreLogging.LogLevel,Symbol}",
+    "page": "Home",
+    "title": "VisualDL.add_component",
+    "category": "method",
+    "text": "add_component(logger, level, tag; kwargs...)\n\nAlthrough this package will automatically initial a component for you when you add records to a component for the first time, it is strongly suggested to use this function to initial a component manually.\n\nFor the detail of kwargs, please read the python api\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.as_mode-Tuple{VisualDLLogger,AbstractString}",
+    "page": "Home",
+    "title": "VisualDL.as_mode",
+    "category": "method",
+    "text": "as_mode(logger, mode)\n\nClone a logger and reset the mode.\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.finish_sampling-Tuple{VisualDLLogger,Symbol}",
+    "page": "Home",
+    "title": "VisualDL.finish_sampling",
+    "category": "method",
+    "text": "finish_sampling(logger, tag)\n\nThis function is only valid for @log_image and @log_audio.\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.save-Tuple{VisualDLLogger}",
+    "page": "Home",
+    "title": "VisualDL.save",
+    "category": "method",
+    "text": "save(logger)\n\nAlthough the logger will automatically save data when the sync_cycle is reached. It is better to force save in the end.\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.set_caption-Tuple{VisualDLLogger,Symbol,AbstractString}",
+    "page": "Home",
+    "title": "VisualDL.set_caption",
+    "category": "method",
+    "text": "set_caption(logger, tag, caption)\n\nSet the caption of a figure.\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.start_sampling-Tuple{VisualDLLogger,Symbol}",
+    "page": "Home",
+    "title": "VisualDL.start_sampling",
+    "category": "method",
+    "text": "start_sampling(logger, tag)\n\nThis function is only valid for @log_image and @log_audio.\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.@log_histogram",
+    "page": "Home",
+    "title": "VisualDL.@log_histogram",
+    "category": "macro",
+    "text": "@log_scalar [tag_name=(args...) | ...]\n@log_histogram [tag_name=(args...) | ...]\n@log_embedding [tag_name=(args...) | ...]\n@log_text [tag_name=(args...) | ...]\n@log_audio [tag_name=(args...) | ...]\n@log_image [tag_name=(args...) | ...]\n\nAdd a record to a component which has the tag_name. If the component is not initialized yet, a new component will be created automatically with default arguments. For the detail of args of each component, please read the doc\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#VisualDL.@log_image",
+    "page": "Home",
+    "title": "VisualDL.@log_image",
+    "category": "macro",
+    "text": "@log_scalar [tag_name=(args...) | ...]\n@log_histogram [tag_name=(args...) | ...]\n@log_embedding [tag_name=(args...) | ...]\n@log_text [tag_name=(args...) | ...]\n@log_audio [tag_name=(args...) | ...]\n@log_image [tag_name=(args...) | ...]\n\nAdd a record to a component which has the tag_name. If the component is not initialized yet, a new component will be created automatically with default arguments. For the detail of args of each component, please read the doc\n\n\n\n\n\n"
+},
+
+{
     "location": "index.html#VisualDL.@log_scalar",
     "page": "Home",
     "title": "VisualDL.@log_scalar",
@@ -49,51 +121,27 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#VisualDL.add_component",
+    "location": "index.html#VisualDL.@log_text",
     "page": "Home",
-    "title": "VisualDL.add_component",
-    "category": "function",
-    "text": "add_component(logger, level, tag; kwargs...)\n\nAlthrough this package will automatically initial a component for you when you add records to a component for the first time, it is strongly suggested to use this function to initial a component manually.\n\nFor the detail of kwargs, please read the python api\n\n\n\n\n\n"
+    "title": "VisualDL.@log_text",
+    "category": "macro",
+    "text": "@log_scalar [tag_name=(args...) | ...]\n@log_histogram [tag_name=(args...) | ...]\n@log_embedding [tag_name=(args...) | ...]\n@log_text [tag_name=(args...) | ...]\n@log_audio [tag_name=(args...) | ...]\n@log_image [tag_name=(args...) | ...]\n\nAdd a record to a component which has the tag_name. If the component is not initialized yet, a new component will be created automatically with default arguments. For the detail of args of each component, please read the doc\n\n\n\n\n\n"
 },
 
 {
-    "location": "index.html#VisualDL.as_mode",
+    "location": "index.html#VisualDL.@log_audio",
     "page": "Home",
-    "title": "VisualDL.as_mode",
-    "category": "function",
-    "text": "as_mode(logger, mode)\n\nClone a logger and reset the mode.\n\n\n\n\n\n"
+    "title": "VisualDL.@log_audio",
+    "category": "macro",
+    "text": "@log_scalar [tag_name=(args...) | ...]\n@log_histogram [tag_name=(args...) | ...]\n@log_embedding [tag_name=(args...) | ...]\n@log_text [tag_name=(args...) | ...]\n@log_audio [tag_name=(args...) | ...]\n@log_image [tag_name=(args...) | ...]\n\nAdd a record to a component which has the tag_name. If the component is not initialized yet, a new component will be created automatically with default arguments. For the detail of args of each component, please read the doc\n\n\n\n\n\n"
 },
 
 {
-    "location": "index.html#VisualDL.start_sampling",
+    "location": "index.html#VisualDL.@log_embedding",
     "page": "Home",
-    "title": "VisualDL.start_sampling",
-    "category": "function",
-    "text": "start_sampling(logger, tag)\n\nThis function is only valid for @log_image and @log_audio.\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#VisualDL.finish_sampling",
-    "page": "Home",
-    "title": "VisualDL.finish_sampling",
-    "category": "function",
-    "text": "finish_sampling(logger, tag)\n\nThis function is only valid for @log_image and @log_audio.\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#VisualDL.set_caption",
-    "page": "Home",
-    "title": "VisualDL.set_caption",
-    "category": "function",
-    "text": "set_caption(logger, tag, caption)\n\nSet the caption of a figure.\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#VisualDL.save",
-    "page": "Home",
-    "title": "VisualDL.save",
-    "category": "function",
-    "text": "save(logger)\n\nAlthough the logger will automatically save data when the sync_cycle is reached. It is better to force save in the end.\n\n\n\n\n\n"
+    "title": "VisualDL.@log_embedding",
+    "category": "macro",
+    "text": "@log_scalar [tag_name=(args...) | ...]\n@log_histogram [tag_name=(args...) | ...]\n@log_embedding [tag_name=(args...) | ...]\n@log_text [tag_name=(args...) | ...]\n@log_audio [tag_name=(args...) | ...]\n@log_image [tag_name=(args...) | ...]\n\nAdd a record to a component which has the tag_name. If the component is not initialized yet, a new component will be created automatically with default arguments. For the detail of args of each component, please read the doc\n\n\n\n\n\n"
 },
 
 {
@@ -101,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Reference",
     "category": "section",
-    "text": "VisualDLLogger\n@log_scalar\nadd_component\nas_mode\nstart_sampling\nfinish_sampling\nset_caption\nsave"
+    "text": "Modules = [VisualDL]"
 },
 
 ]}
