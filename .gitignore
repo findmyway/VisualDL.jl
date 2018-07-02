@@ -11,3 +11,4 @@ deps/deps.jl
 tmp/*
 docs/build/
 docs/site/
+Manifest.toml
